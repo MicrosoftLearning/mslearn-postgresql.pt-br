@@ -54,14 +54,14 @@ Esta etapa orientará você no uso de comandos da CLI do Azure do Azure Cloud Sh
     RG_NAME=rg-learn-postgresql-ai-$REGION
     ```
 
-    O comando final gera aleatoriamente uma senha para o login de administrador do PostgreSQL. Certifique-se de copiá-lo para um local seguro para usar mais tarde para se conectar ao seu servidor flexível do PostgreSQL.
+    O comando final gera aleatoriamente uma senha para o login de administrador do PostgreSQL. Certifique-se de copiá-la para um local seguro para usar mais tarde para se conectar ao seu servidor flexível do PostgreSQL.
 
     ```bash
     a=()
     for i in {a..z} {A..Z} {0..9}; 
-       do
-       a[$RANDOM]=$i
-    done
+        do
+        a[$RANDOM]=$i
+        done
     ADMIN_PASSWORD=$(IFS=; echo "${a[*]::18}")
     echo "Your randomly generated PostgreSQL admin user's password is:"
     echo $ADMIN_PASSWORD
