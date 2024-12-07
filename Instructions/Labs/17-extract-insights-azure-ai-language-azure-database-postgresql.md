@@ -25,7 +25,7 @@ No final, você terá quatro novas colunas na tabela `listings` com insights ext
 
 ## Antes de começar
 
-Você precisa de uma [assinatura do Azure](https://azure.microsoft.com/free) com direitos administrativos e deve ter permissão de acesso ao OpenAI do Azure nessa assinatura. Caso precise ter acesso ao OpenAI do Azure, solicite-o na página [Acesso limitado do OpenAI do Azure](https://learn.microsoft.com/legal/cognitive-services/openai/limited-access).
+Você precisa de uma [assinatura do Azure](https://azure.microsoft.com/free) para a qual você tem direitos administrativos.
 
 ### Implantar recursos na assinatura do Azure
 
@@ -66,7 +66,7 @@ Esta etapa orienta você no uso de comandos da CLI do Azure do Azure Cloud Shell
     for i in {a..z} {A..Z} {0..9}; 
         do
         a[$RANDOM]=$i
-    done
+        done
     ADMIN_PASSWORD=$(IFS=; echo "${a[*]::18}")
     echo "Your randomly generated PostgreSQL admin user's password is:"
     echo $ADMIN_PASSWORD
@@ -298,8 +298,8 @@ Para redefinir os dados de amostra, você pode executar `DROP TABLE listings` e 
 
     ```sql
     SELECT id, name
-    FROM listings, unnest(entities) e
-    WHERE e.text LIKE '%basement%'
+    FROM listings, unnest(listings.entities) AS e
+    WHERE e.text LIKE '%roof%deck%'
     LIMIT 10;
     ```
 
@@ -356,8 +356,8 @@ Para redefinir os dados de amostra, você pode executar `DROP TABLE listings` e 
     ```sql
     UPDATE listings
     SET
-     description_pii_safe = pii.redacted_text,
-     pii_entities = pii.entities
+        description_pii_safe = pii.redacted_text,
+        pii_entities = pii.entities
     FROM (SELECT id, description FROM listings WHERE description_pii_safe IS NULL OR pii_entities IS NULL ORDER BY id LIMIT 100) subset,
     LATERAL azure_cognitive.recognize_pii_entities(subset.description, 'en-us') as pii
     WHERE listings.id = subset.id;

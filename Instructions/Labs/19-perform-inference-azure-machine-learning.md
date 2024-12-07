@@ -54,14 +54,14 @@ Esta etapa orientará você no uso de comandos da CLI do Azure do Azure Cloud Sh
     RG_NAME=rg-learn-postgresql-ai-$REGION
     ```
 
-    O comando final gera aleatoriamente uma senha para o login de administrador do PostgreSQL. Certifique-se de copiá-lo para um local seguro para usar mais tarde para se conectar ao seu servidor flexível do PostgreSQL.
+    O comando final gera aleatoriamente uma senha para o login de administrador do PostgreSQL. Certifique-se de copiá-la para um local seguro para usar mais tarde para se conectar ao seu servidor flexível do PostgreSQL.
 
     ```bash
     a=()
     for i in {a..z} {A..Z} {0..9}; 
-       do
-       a[$RANDOM]=$i
-    done
+        do
+        a[$RANDOM]=$i
+        done
     ADMIN_PASSWORD=$(IFS=; echo "${a[*]::18}")
     echo "Your randomly generated PostgreSQL admin user's password is:"
     echo $ADMIN_PASSWORD
@@ -133,41 +133,37 @@ A primeira etapa é implantar um modelo do Azure Machine Learning O repositório
 
     ![Captura de tela do Azure Machine Learning com o botão Iniciar estúdio realçado por uma caixa vermelha.](media/19-aml-launch-studio.png)
 
-4. Selecione a opção de menu **Workspaces** e escolha o workspace do Azure Machine Learning recém-criado.
-
-    ![Captura de tela do Estúdio do Azure Machine Learning com a opção de menu Workspaces e o workspace do Azure Machine Learning realçado por caixas vermelhas.](media/19-aml-workspace.png)
-
-5. Selecione a opção de menu **Modelos** no menu **Ativos**. Então, selecione a opção de menu **+ Registrar** e selecione **De arquivos locais**.
+4. Selecione a opção de menu **Modelos** no menu **Ativos**. Então, selecione a opção de menu **+ Registrar** e selecione **De arquivos locais**.
 
     ![Captura de tela da página Lista de modelo. Uma caixa vermelha envolve a opção de menu Modelos, o botão suspenso Registrar e a opção De arquivos locais.](media/19-aml-register-from-local-files.png)
 
-6. No menu **Carregar modelo**, defina o tipo de modelo como **MLflow**. Em seguida, escolha **Procurar** e navegue até a pasta **mlflow-model** e carregue os ativos. Após essa etapa, selecione o botão **Avançar** para continuar.
+5. No menu **Carregar modelo**, defina o tipo de modelo como **MLflow**. Em seguida, escolha **Procurar** e navegue até a pasta **mlflow-model** e carregue os ativos. Após essa etapa, selecione o botão **Avançar** para continuar.
 
     ![Captura de tela da página de menu Carregar modelo. Uma caixa vermelha envolve os botões Tipo de modelo do MLflow, Procurar e Avançar.](media/19-aml-register-upload-model.png)
 
-7. Nomeie o modelo **RentalListings** e selecione o botão **Avançar**.
+6. Nomeie o modelo **RentalListings** e selecione o botão **Avançar**.
 
     ![Captura de tela da tela de configurações do modelo com o valor de RentalListings inserido no campo Nome. Caixas de realce vermelhas circundam a caixa de texto Nome e o botão Avançar.](media/19-aml-register-model-settings.png)
 
-8. Selecione o botão **Registrar** para concluir o registro do modelo. Essa ação levará você de volta para a página **Modelos**. Selecione o modelo recém-criado.
+7. Selecione o botão **Registrar** para concluir o registro do modelo. Essa ação levará você de volta para a página **Modelos**. Selecione o modelo recém-criado.
 
-    > [!Note]
-    >
-    > Se você não vir um modelo, selecione o botão de opção de menu **Atualizar** para recarregar a página. Depois disso, você deverá ver o modelo **RentalListings**.
+> [!Note]
+>
+> Se você não vir um modelo, selecione o botão de opção de menu **Atualizar** para recarregar a página. Depois disso, você deverá ver o modelo **RentalListings**.
 
-9. Selecione a opção de botão **Implantar** e crie um novo **ponto de extremidade em tempo real**.
+8. Selecione a opção de botão **Implantar** e crie um novo **ponto de extremidade em tempo real**.
 
     ![Captura de tela da opção de menu Ponto de extremidade em tempo real destacada por uma caixa vermelha.](media/19-aml-automl-deploy-rte.png)
 
-10. No menu suspenso de implantação, defina a **Máquina virtual** como **Standard_DS2_v2** e a **Contagem de instâncias** como 1. Selecione o botão **Implantar**. A implantação pode levar vários minutos para ser concluída, pois o processo de implantação inclui o provisionamento de uma máquina virtual e a implantação do modelo como um contêiner do Docker.
+9. No menu suspenso de implantação, defina a **Máquina virtual** como **Standard_DS2_v2** e a **Contagem de instâncias** como 1. Selecione o botão **Implantar**. A implantação pode levar vários minutos para ser concluída, pois o processo de implantação inclui o provisionamento de uma máquina virtual e a implantação do modelo como um contêiner do Docker.
 
     ![Captura de tela do menu suspenso da implantação. A máquina virtual é Standard_DS2_v2 e a contagem de instâncias é 1. As caixas vermelhas realçam a lista suspensa Máquina virtual, a caixa de texto Contagem de instâncias e o botão Implantar.](media/19-aml-automl-deploy-endpoint.png)
 
-11. Depois que o ponto de extremidade for implantado, navegue até a guia **Consumir** e copie o ponto de extremidade REST e a chave primária para que você possa usá-los na próxima seção.
+10. Depois que o ponto de extremidade for implantado, navegue até a guia **Consumir** e copie o ponto de extremidade REST e a chave primária para que você possa usá-los na próxima seção.
 
     ![Captura de tela da guia Consumir do ponto de extremidade. As caixas vermelhas destacam os botões de cópia para o ponto de extremidade REST e a chave de autenticação primária.](media/19-aml-automl-endpoint-consume.png)
 
-12. Para testar se o ponto de extremidade está sendo executado corretamente, você pode usar a guia **Testar** no ponto de extremidade. Em seguida, cole no bloco a seguir, substituindo qualquer entrada existente no momento. Selecione o botão **Testar** e você verá uma saída JSON contendo uma matriz com um único valor decimal indicando o número de dólares americanos que você deve esperar que essa propriedade específica ganhe por uma única noite de aluguel.
+11. Para testar se o ponto de extremidade está sendo executado corretamente, você pode usar a guia **Testar** no ponto de extremidade. Em seguida, cole no bloco a seguir, substituindo qualquer entrada existente no momento. Selecione o botão **Testar** e você verá uma saída JSON contendo uma matriz com um único valor decimal indicando o número de dólares americanos que você deve esperar que essa propriedade específica ganhe por uma única noite de aluguel.
 
     ```json
     {
@@ -327,9 +323,9 @@ Para preencher a tabela de tradução de idioma, você criará um procedimento a
     $$ LANGUAGE sql;
     ```
 
-    > [!Note]
-    >
-    > Por padrão, o nome da implantação é uma combinação do nome do modelo (**rentallistings**) e do número de versão (**1**). Se você implantar uma nova versão do modelo e usar o nome de implantação padrão, o novo nome de implantação será **rentallistings-2**.
+> [!Note]
+>
+> Por padrão, o nome da implantação é uma combinação do nome do modelo (**rentallistings**) e do número de versão (**1**). Se você implantar uma nova versão do modelo e usar o nome de implantação padrão, o novo nome de implantação será **rentallistings-2**.
 
 2. Execute a função utilizando o seguite comando SQL:
 
