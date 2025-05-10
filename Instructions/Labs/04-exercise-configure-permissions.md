@@ -81,7 +81,7 @@ Para instalar o Azure Data Studio para uso com o Banco de Dados do Azure para Po
 
 ### Criar o banco de dados do zoológico
 
-1. Navegue até a pasta com seus arquivos de script de exercício ou baixe o **Lab2_ZooDb.sql** do [MSLearn PostgreSQL Labs](https://github.com/MicrosoftLearning/mslearn-postgresql/Allfiles/Labs/02).
+1. Navegue até a pasta com seus arquivos de script de exercício ou baixe o **Lab2_ZooDb.sql** do [MSLearn PostgreSQL Labs](https://github.com/MicrosoftLearning/mslearn-postgresql/blob/main/Allfiles/Labs/02).
 1. Abra o Azure Data Studio se ainda não estiver aberto.
 1. Selecione **Arquivo**, **Abrir Arquivo** e navegue até a pasta em que você salvou o script. Selecione **../Allfiles/Labs/02/Lab2_ZooDb.sql** e **Abrir**. Se um aviso de confiança for exibido, selecione **Abrir**.
 1. Execute o script. O banco de dados zoodb é criado.
